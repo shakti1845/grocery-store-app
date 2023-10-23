@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body background and font */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Form container */
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form input styles */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Link style */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Product</h2>
+    <form method="post" action="/add_product" enctype="multipart/form-data">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <br>
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.50" required>
+        <br>
+        <label for="qty">Quantity:</label>
+        <input type="number" id="qty" name="qty" value="{{ product.qty if product else '' }}" required>
+        <br>
+        
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="dairy">Dairy</option>
+            <option value="skincare">Skin Care</option>
+            <option value ="fruits">Fruits</option>
+            <option value ="daily soap">Daily soap</option>
+            <option value ="grains">grains</option>
+            <!-- Add more categories as needed -->
+        </select>
+
+        
+        <br>
+        <label for="image">Product Image:</label><br>
+        <input type="file" id="image" name="image" value="{{ product.image }}" required>
+        <br>
+        
+        <input type="submit" value="Add Product">
+    </form>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

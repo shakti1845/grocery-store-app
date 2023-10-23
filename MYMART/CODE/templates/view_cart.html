@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <style>
+        /* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body background and font */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Shopping cart container */
+ul {
+    list-style-type: none;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual cart item */
+li {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+/* Product name */
+li strong {
+    display: block;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+/* Checkout button */
+form {
+    margin-top: 20px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Continue shopping link */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <h2>Shopping Cart</h2>
+    <ul>
+        {% for Product in cart %}
+        <li>
+            <strong>{{ Product['name'] }}</strong>
+            <br>
+            {{ Product['description'] }}
+            <br>
+            Price: {{ Product['price'] }}
+            <br>
+            Quantity: {{Product['quantity']}}
+            <br>
+            <a href="{{ url_for('remove_item',product_id=Product['id']) }}">remove item</a>
+        </li>
+        {% endfor %}
+    </ul>
+     <!-- Display the total price -->
+         
+     
+     <p>Total Price: {{ total_price }}</p>
+
+
+
+    <form method="post" action="{{url_for('checkout')}}">
+        <input type="submit" value="Checkout">
+    </form>
+    <a href="/profile">Continue Shopping</a>
+</body>
+</html>
